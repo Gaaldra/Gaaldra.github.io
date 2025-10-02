@@ -1,0 +1,82 @@
+[
+  {
+    "id": "feat",
+    "name": "feat",
+    "emoji": "✨",
+    "title": "Funcionalidade",
+    "description": "Usado quando você **adiciona uma nova funcionalidade** ou recurso ao seu projeto. Algo que o usuário final verá ou usará.",
+    "example": "feat: Adiciona filtro de busca avançada na lista de produtos"
+  },
+  {
+    "id": "fix",
+    "name": "fix",
+    "emoji": "🐛",
+    "title": "Correção",
+    "description": "Usado quando você **corrige um bug** (um erro) no código. A correção faz algo que estava quebrado voltar a funcionar corretamente.",
+    "example": "fix: Corrige falha de login quando a senha é muito longa"
+  },
+  {
+    "id": "docs",
+    "name": "docs",
+    "emoji": "📚",
+    "title": "Documentação",
+    "description": "Usado para mudanças que afetam apenas a **documentação** (README, guias de usuário, comentários, etc.). O código em si não muda.",
+    "example": "docs: Atualiza o README com instruções de deploy"
+  },
+  {
+    "id": "style",
+    "name": "style",
+    "emoji": "🎨",
+    "title": "Estilo",
+    "description": "Usado para mudanças que não alteram a lógica do código, mas sim a sua **formatação** (espaços, ponto e vírgula, indentação, etc.).",
+    "example": "style: Padroniza aspas duplas em todo o projeto"
+  },
+  {
+    "id": "refactor",
+    "name": "refactor",
+    "emoji": "♻️",
+    "title": "Refatoração",
+    "description": "Usado para mudanças que **reorganizam ou melhoram a estrutura do código** sem adicionar novas funcionalidades ou corrigir um bug.",
+    "example": "refactor: Simplifica a função de cálculo de impostos"
+  },
+  {
+    "id": "test",
+    "name": "test",
+    "emoji": "🧪",
+    "title": "Teste",
+    "description": "Usado para adicionar **novos testes** (unitários, de integração) ou corrigir testes existentes.",
+    "example": "test: Adiciona testes de validação para campos de formulário"
+  },
+  {
+    "id": "chore",
+    "name": "chore",
+    "emoji": "🧹",
+    "title": "Tarefa/Manutenção",
+    "description": "Usado para tarefas de manutenção, alterações na configuração de ferramentas ou no processo de build que não afetam o código de produção.",
+    "example": "chore: Atualiza dependência do lodash para versão mais recente"
+  },
+  {
+    "id": "perf",
+    "name": "perf",
+    "emoji": "⚡",
+    "title": "Performance",
+    "description": "Usado para alterações que **melhoram a velocidade** ou a eficiência do código.",
+    "example": "perf: Otimiza a consulta SQL para reduzir tempo de carregamento"
+  },
+  {
+    "id": "build",
+    "name": "build",
+    "emoji": "📦",
+    "title": "Build/Dependências",
+    "description": "Usado para mudanças que afetam o sistema de build, como alterações em *scripts* ou em arquivos de dependências (ex: `package.json`).",
+    "example": "build: Atualiza a versão do Webpack para 5.8"
+  },
+  {
+    "id": "ci",
+    "name": "ci",
+    "emoji": "⚙️",
+    "title": "Integração Contínua",
+    "description": "Usado para mudanças nos arquivos de configuração de Integração Contínua/Deploy Contínuo (CI/CD).",
+    "example": "ci: Configura o pipeline para rodar testes antes do deploy"
+  }
+]

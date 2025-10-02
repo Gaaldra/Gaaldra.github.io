@@ -1,168 +1,71 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia Interativo de Commits do Git</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Warm Neutrals (Amber, Teal, Slate) -->
-    <!-- Application Structure Plan: A single-page, vertical-scroll app designed for quick reference. It features three main sections: an introduction, an interactive prefix explorer with search functionality, and a dedicated section for 'Breaking Changes'. This structure was chosen over a static table to create a more engaging, focused learning experience. The search bar turns the informational page into a practical tool for developers to quickly find the right prefix, which is the primary user task. -->
-    <!-- Visualization & Content Choices: Report Info: Table of commit prefixes. Goal: Inform, Organize, Quick Lookup. Viz/Presentation: Interactive grid of buttons for prefixes and a separate detail-display area, updated on click. Interaction: Click to select a prefix, real-time search to filter the grid. Justification: This interactive approach is more engaging than a static table and improves usability by allowing users to focus on one item at a time and find information quickly. The 'Breaking Change' rule is separated for emphasis. Library/Method: Vanilla JS for interactivity, Tailwind CSS for layout. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .commit-example {
-            font-family: monospace;
-            background-color: #f0f4f8;
-            color: #1e293b;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.375rem;
-            border: 1px solid #e2e8f0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-        .active-prefix {
-            background-color: #0d9488 !important;
-            color: white !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-        }
-    </style>
-</head>
-<body class="bg-amber-50 text-slate-800 antialiased">
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jovem Programadora Utilidades</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatics.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family-Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
 
+  <body class="bg-amber-50 text-slate-800 antialiased">
     <div class="container mx-auto max-w-5xl p-4 sm:p-6 md:p-8">
+      <header class="text-center mb-10">
+        <h1 class="text-4xl md:text-5xl font-bold text-teal-800 mb-2">
+          Guia Interativo de Commits
+        </h1>
+        <p class="text-lg text-slate-600">
+          Explore os prefixos do padrão de commits convencionais.
+        </p>
+      </header>
 
-        <header class="text-center mb-10">
-            <h1 class="text-4xl md:text-5xl font-bold text-teal-800 mb-2">Guia Interativo de Commits</h1>
-            <p class="text-lg text-slate-600">Explore os prefixos do Padrão de Commits Convencionais.</p>
-        </header>
+      <main>
+        <section
+          id="explorer"
+          class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200"
+        >
+          <div class="mb-6">
+            <p>
+              Usar um padrão para as mensagens de commit, conhecido como
+              <span class="font-semibold text-teal-700"
+                >Commits Converncionais</span
+              >, organiza o histórico do seu projeto. Pense no prefixo comom a
+              categoria da sua mudança. Clique abaixo para ver sua explicação e
+              um exemplo prático
+            </p>
+          </div>
 
-        <main>
-            <section id="explorer" class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200">
-                <div class="mb-6">
-                    <p class="text-slate-600 leading-relaxed">
-                        Usar um padrão para as mensagens de commit, conhecido como <span class="font-semibold text-teal-700">Commits Convencionais</span>, organiza o histórico do seu projeto. Pense no prefixo como a categoria da sua mudança. Use a busca para filtrar ou clique em um prefixo abaixo para ver sua explicação e um exemplo prático.
-                    </p>
-                </div>
+          <div
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-6"
+            id="prefix-buttons"
+          ></div>
 
-                <div class="mb-6">
-                    <input type="text" id="searchInput" placeholder="🔎 Buscar por prefixo (ex: feat, docs)..." class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-shadow">
-                </div>
-                
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-6" id="prefix-buttons">
-                </div>
+          <div
+            class="bg-amber-50/50 p-6 rounded-lg border border-amber-200 min-h-[200px] transition-all duration-300"
+            id="prefix-details"
+          ></div>
+        </section>
+      </main>
 
-                <div id="prefix-details" class="bg-amber-50/50 p-6 rounded-lg border border-amber-200 min-h-[200px] transition-all duration-300">
-                </div>
-            </section>
-        </main>
-
-        <footer class="text-center mt-12 text-slate-500 text-sm">
-            <a href="./checklist.html" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 transform hover:scale-[1.01] text-sm md:text-base" aria-label="Acessar o checklist diário de desenvolvimento.">
-                    Acessar Checklist Diário
-                </a>
-        </footer>
+      <footer class="text-center mt-12">
+        <div class="flex flex-col items-center space-y-3">
+          <a
+            href="daily_checklist.html"
+            class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-4 px-4 rounded-lg shadow-md transition duration-300 transform hover:scale-[1.01] text-sm md:text-base"
+            aria-label="Acessar o checklist diário de desenvolvimento."
+          >
+            Acessar Checklist Diário
+          </a>
+        </div>
+      </footer>
     </div>
 
-    <script>
-        const commitPrefixes = [
-            { id: 'feat', name: 'feat', emoji: '✨', title: 'Funcionalidade', description: 'Usado quando você **adiciona uma nova funcionalidade** ou recurso ao seu projeto. Algo que o usuário final verá ou usará.', example: 'feat: Adiciona filtro de busca avançada na lista de produtos' },
-            { id: 'fix', name: 'fix', emoji: '🐛', title: 'Correção', description: 'Usado quando você **corrige um bug** (um erro) no código. A correção faz algo que estava quebrado voltar a funcionar corretamente.', example: 'fix: Corrige falha de login quando a senha é muito longa' },
-            { id: 'docs', name: 'docs', emoji: '📚', title: 'Documentação', description: 'Usado para mudanças que afetam apenas a **documentação** (README, guias de usuário, comentários, etc.). O código em si não muda.', example: 'docs: Atualiza o README com instruções de deploy' },
-            { id: 'style', name: 'style', emoji: '🎨', title: 'Estilo', description: 'Usado para mudanças que não alteram a lógica do código, mas sim a sua **formatação** (espaços, ponto e vírgula, indentação, etc.).', example: 'style: Padroniza aspas duplas em todo o projeto' },
-            { id: 'refactor', name: 'refactor', emoji: '♻️', title: 'Refatoração', description: 'Usado para mudanças que **reorganizam ou melhoram a estrutura do código** sem adicionar novas funcionalidades ou corrigir um bug.', example: 'refactor: Simplifica a função de cálculo de impostos' },
-            { id: 'test', name: 'test', emoji: '🧪', title: 'Teste', description: 'Usado para adicionar **novos testes** (unitários, de integração) ou corrigir testes existentes.', example: 'test: Adiciona testes de validação para campos de formulário' },
-            { id: 'chore', name: 'chore', emoji: '🧹', title: 'Tarefa/Manutenção', description: 'Usado para tarefas de manutenção, alterações na configuração de ferramentas ou no processo de build que não afetam o código de produção.', example: 'chore: Atualiza dependência do lodash para versão mais recente' },
-            { id: 'perf', name: 'perf', emoji: '⚡', title: 'Performance', description: 'Usado para alterações que **melhoram a velocidade** ou a eficiência do código.', example: 'perf: Otimiza a consulta SQL para reduzir tempo de carregamento' },
-            { id: 'build', name: 'build', emoji: '📦', title: 'Build/Dependências', description: 'Usado para mudanças que afetam o sistema de build, como alterações em *scripts* ou em arquivos de dependências (ex: `package.json`).', example: 'build: Atualiza a versão do Webpack para 5.8' },
-            { id: 'ci', name: 'ci', emoji: '⚙️', title: 'Integração Contínua', description: 'Usado para mudanças nos arquivos de configuração de Integração Contínua/Deploy Contínuo (CI/CD).', example: 'ci: Configura o pipeline para rodar testes antes do deploy' },
-        ];
-
-        const prefixButtonsContainer = document.getElementById('prefix-buttons');
-        const prefixDetailsContainer = document.getElementById('prefix-details');
-        const searchInput = document.getElementById('searchInput');
-
-        let currentActiveButton = null;
-
-        function displayDetails(prefixId) {
-            const prefix = commitPrefixes.find(p => p.id === prefixId);
-            if (!prefix) return;
-            
-            prefixDetailsContainer.innerHTML = `
-                <div class="flex items-center mb-4">
-                    <span class="text-3xl mr-3">${prefix.emoji}</span>
-                    <div>
-                        <h3 class="text-2xl font-bold text-teal-800">${prefix.name}</h3>
-                        <p class="text-md text-slate-600 font-medium">${prefix.title}</p>
-                    </div>
-                </div>
-                <p class="text-slate-700 leading-relaxed mb-4">${prefix.description}</p>
-                <p class="text-sm font-semibold text-slate-500 mb-1">EXEMPLO PRÁTICO:</p>
-                <div class="commit-example">${prefix.example}</div>
-            `;
-
-            const newActiveButton = document.querySelector(`[data-prefix-id="${prefixId}"]`);
-            if (currentActiveButton) {
-                currentActiveButton.classList.remove('active-prefix');
-            }
-            if (newActiveButton) {
-                newActiveButton.classList.add('active-prefix');
-                currentActiveButton = newActiveButton;
-            }
-        }
-
-        function renderButtons(filter = '') {
-            const filteredPrefixes = commitPrefixes.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
-            prefixButtonsContainer.innerHTML = '';
-            
-            if (filteredPrefixes.length === 0) {
-                 prefixButtonsContainer.innerHTML = `<p class="col-span-full text-center text-slate-500">Nenhum prefixo encontrado.</p>`;
-                 return;
-            }
-
-            filteredPrefixes.forEach(prefix => {
-                const button = document.createElement('button');
-                button.className = 'p-3 bg-teal-600/10 text-teal-800 font-bold rounded-lg hover:bg-teal-600/20 transition-all duration-200 ease-in-out';
-                button.textContent = prefix.name;
-                button.dataset.prefixId = prefix.id;
-                prefixButtonsContainer.appendChild(button);
-            });
-        }
-        
-        prefixButtonsContainer.addEventListener('click', (event) => {
-            if (event.target.tagName === 'BUTTON') {
-                const prefixId = event.target.dataset.prefixId;
-                displayDetails(prefixId);
-            }
-        });
-
-        searchInput.addEventListener('keyup', (event) => {
-            renderButtons(event.target.value);
-            const firstVisibleButton = prefixButtonsContainer.querySelector('button');
-            if(firstVisibleButton && event.target.value.length > 0) {
-                 displayDetails(firstVisibleButton.dataset.prefixId);
-            } else if (!firstVisibleButton) {
-                prefixDetailsContainer.innerHTML = '';
-            } else if (event.target.value.length === 0) {
-                displayDetails('feat');
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderButtons();
-            displayDetails('feat');
-        });
-    </script>
-</body>
+    <script src="./js/index.js"></script>
+  </body>
 </html>
-
-
-
-
-
