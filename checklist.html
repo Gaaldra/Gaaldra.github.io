@@ -4,206 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checklist Diário de Tarefas</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Estilo para simular o layout de item marcado */
-        .completed-task {
-            text-decoration: line-through;
-            color: #94a3b8; /* slate-400 */
-        }
-    </style>
+    <link href="./css/checklist.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-amber-50 text-slate-800 antialiased min-h-screen flex items-center justify-center p-4">
 
     <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
         
-        <!-- HEADER: Simulação da barra de tarefas -->
         <header class="bg-slate-800 p-4 text-white rounded-t-2xl">
-            <h1 class="text-xl font-bold mb-1">UC2 Adicionar pasta de Serviços</h1>
-            <div class="text-sm text-slate-400 flex items-center space-x-2">
-                <span class="inline-block w-3 h-3 bg-teal-400 rounded-full"></span>
-                <span>Tarefa de Estrutura de Projeto</span>
-            </div>
+            <h1 class="text-xl font-bold mb-1">UC2 - Projeto Desktop</h1>
         </header>
 
-        <!-- Seleção de Aula (para separação no DB) -->
         <div class="p-6 pb-2 border-b border-slate-100 flex items-center justify-between">
             <label for="lesson-select" class="text-sm font-semibold text-teal-600">SELECIONAR AULA:</label>
             <select id="lesson-select" class="p-2 border border-slate-300 rounded-lg text-sm text-slate-700 focus:ring-teal-500 focus:border-teal-500 transition-shadow">
-                <option value="aula_estrutura_inicial">Aula: Estrutura Inicial (.NET)</option>
-                <option value="aula_commits_front">Aula: Padrões de Commits (Front)</option>
-                <option value="aula_rotas_api">Aula: Configuração de Rotas (API)</option>
+                <option selected disabled>Selecione uma aula</option>
             </select>
         </div>
 
-        <!-- CORPO DA TAREFA (Resumo) -->
         <div class="p-6">
             <p class="text-sm font-semibold text-slate-500 mb-2">DESCRIÇÃO RÁPIDA</p>
             <textarea 
+                id="description-area"
                 class="w-full p-3 h-20 border border-slate-300 rounded-lg text-slate-700 resize-none focus:ring-teal-500 focus:border-teal-500 transition-shadow" 
                 placeholder="Digite uma descrição ou adicione anotações aqui" 
                 readonly
-            >Ajuste inicial da arquitetura de pastas para seguir o padrão de responsabilidade.
-            </textarea>
+            ></textarea>
         </div>
 
-        <!-- CHECKLIST INTERATIVO (O foco da imagem) -->
         <section class="p-6 pt-0">
             <div class="flex justify-between items-center mb-4 border-t pt-4">
                 <h2 class="text-lg font-bold text-slate-800">Lista de verificação</h2>
-                <span id="checklist-counter" class="text-lg font-semibold text-teal-600">0 / 2</span>
+                <span id="checklist-counter" class="text-lg font-semibold text-teal-600">0 / 0</span>
             </div>
-            
-            <!-- Remove o indicador de loading do Firebase -->
-            <div id="loading-indicator" class="text-center text-slate-500 py-4 hidden">
-                <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-teal-500 rounded-full" role="status"></div>
-                <p>Carregando seu progresso...</p>
-            </div>
-
+        
             <div id="checklist-items" class="space-y-3">
-                <!-- Itens serão renderizados aqui pelo JS -->
             </div>
-
-            <!-- O bloco de ADICIONAR ITEM foi removido daqui -->
             
         </section>
         
     </div>
 
-    <script>
-        // Prefixos do LocalStorage para salvar diferentes checklists
-        const STORAGE_PREFIX = 'checklist_lesson_'; 
-        
-        // Tarefas iniciais padrão
-        const initialTasks = [
-            { id: 1, text: 'Criar a pasta de serviços ("Serviços") na raiz do projeto.', completed: false },
-            { id: 2, text: 'Criar o arquivo UsuarioServicos.cs dentro da nova pasta.', completed: false },
-            { id: 3, text: 'Adicionar a injeção de dependência do DBContext no construtor da classe UsuarioServicos', completed: false },
-            { id: 4, text: 'Criar o método público AdicionarUsuario(Usuario usuario) na classe de serviços', completed: false },
-            { id: 5, text: 'Implementar a chamada ao ORM para adicionar o objeto', completed: false },
-            { id: 6, text: 'Chamar SaveChanges para persistir os dados no banco de dados', completed: false },
-            { id: 7, text: 'Adicionar tratamento básico de exceções para lidar com possíveis falhas de conexão ou validação', completed: false }
-        ];
-
-        let tasks = [...initialTasks];
-        // nextId é mantido para consistência, mas não é mais incrementado por adição de usuário.
-        let nextId = tasks.length + 1; 
-
-        const checklistItemsContainer = document.getElementById('checklist-items');
-        const counterElement = document.getElementById('checklist-counter');
-        // Váriaveis de adição de tarefa removidas
-        const lessonSelect = document.getElementById('lesson-select');
-        
-        // --- Funções de Persistência (LocalStorage) ---
-
-        function getStorageKey(lessonKey) {
-            // Cria uma chave única no LocalStorage para a aula selecionada
-            return STORAGE_PREFIX + lessonKey;
-        }
-
-        function saveChecklist(lessonKey) {
-            const key = getStorageKey(lessonKey);
-            try {
-                // Salva o array de tasks como uma string JSON
-                localStorage.setItem(key, JSON.stringify(tasks));
-            } catch (error) {
-                console.error("Erro ao salvar no LocalStorage:", error);
-            }
-        }
-
-        function loadChecklist(lessonKey) {
-            const key = getStorageKey(lessonKey);
-            try {
-                const storedData = localStorage.getItem(key);
-                if (storedData) {
-                    const loadedTasks = JSON.parse(storedData);
-                    if (Array.isArray(loadedTasks) && loadedTasks.length > 0) {
-                        tasks = loadedTasks;
-                        // Garante que o nextId seja maior que o ID máximo existente
-                        nextId = tasks.reduce((maxId, task) => Math.max(maxId, task.id), 0) + 1;
-                    } else {
-                        // Se os dados estiverem vazios ou inválidos, usa as tarefas iniciais
-                        tasks = [...initialTasks];
-                        nextId = tasks.length + 1;
-                    }
-                } else {
-                    // Não há dados salvos para esta aula, inicia com tarefas padrão
-                    tasks = [...initialTasks];
-                    nextId = tasks.length + 1;
-                }
-            } catch (e) {
-                console.error("Erro ao carregar ou parsear dados do LocalStorage, usando tarefas iniciais.", e);
-                tasks = [...initialTasks];
-                nextId = tasks.length + 1;
-            }
-            renderChecklist();
-            updateCounter();
-        }
-
-        // --- Funções de UI/Lógica Local ---
-
-        function updateCounter() {
-            const completed = tasks.filter(task => task.completed).length;
-            counterElement.textContent = `${completed} / ${tasks.length}`;
-        }
-
-        function toggleTask(id) {
-            const task = tasks.find(t => t.id === id);
-            if (task) {
-                task.completed = !task.completed;
-                renderChecklist();
-                updateCounter();
-                saveChecklist(lessonSelect.value); // Salva a mudança no LocalStorage
-            }
-        }
-        
-        // Função addTask() removida
-
-        function renderChecklist() {
-            checklistItemsContainer.innerHTML = '';
-            tasks.forEach(task => {
-                const taskDiv = document.createElement('div');
-                taskDiv.className = 'flex items-start space-x-3 cursor-pointer p-2 rounded-lg hover:bg-slate-100 transition duration-150';
-                // Usamos o listener no div pai para marcar o item
-                taskDiv.onclick = () => toggleTask(task.id); 
-
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.checked = task.completed;
-                // Previne o clique duplo
-                checkbox.onclick = (e) => e.stopPropagation(); 
-                checkbox.className = 'mt-1 w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded focus:ring-teal-500';
-                checkbox.style.cursor = 'pointer';
-
-                const textSpan = document.createElement('span');
-                textSpan.className = `text-slate-700 flex-1 ${task.completed ? 'completed-task' : ''}`;
-                textSpan.textContent = task.text;
-
-                taskDiv.appendChild(checkbox);
-                taskDiv.appendChild(textSpan);
-                checklistItemsContainer.appendChild(taskDiv);
-            });
-        }
-        
-        // --- Inicialização e Event Listeners ---
-        
-        // Listener para mudança de aula (carrega novos dados)
-        lessonSelect.addEventListener('change', (e) => {
-            loadChecklist(e.target.value);
-        });
-        
-        // Event listeners de adição de tarefa removidos
-
-        // Inicializa o checklist carregando a aula selecionada por padrão
-        document.addEventListener('DOMContentLoaded', () => {
-            loadChecklist(lessonSelect.value);
-        });
-    </script>
+    <script src="./js/checklist.js"></script>
 </body>
 </html>
