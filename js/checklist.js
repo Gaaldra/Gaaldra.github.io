@@ -1,9 +1,11 @@
 let lessons = [];
 let tasks = [];
+let links = [];
 const lessonSelect = document.getElementById("lesson-select");
 const descriptionArea = document.getElementById("description-area");
 const checklistItemsContainer = document.getElementById("checklist-items");
 const counterElement = document.getElementById("checklist-counter");
+const linksContainer = document.getElementById("links-container");
 
 async function loadLessons() {
   try {
@@ -38,6 +40,10 @@ function setDescription(lessonId) {
 
 function setTasks(lesson) {
   tasks = lesson.tasks;
+}
+
+function setLinks(lesson) {
+  links = lesson.links;
 }
 
 function toggleTask(id) {
@@ -78,6 +84,33 @@ function renderChecklist() {
   updateCounter();
 }
 
+function renderLinksList() {
+  linksContainer.innerHTML = "";
+  links.forEach((link) => {
+    const spanIcon = document.createElement("span");
+    spanIcon.className = "text-indigo-600 mr-3 text-xl";
+    spanIcon.innerHTML = "🔗";
+
+    const spanText = document.createElement("span");
+    spanText.className = "font-medium text-gray-700 hover:text-indigo-700";
+    spanText.innerHTML = link.title;
+
+    const divTag = document.createElement("div");
+    divTag.className = "flex items-center";
+    divTag.appendChild(spanIcon);
+    divTag.appendChild(spanText);
+
+    const linkTag = document.createElement("a");
+    linkTag.className =
+      "block p-3 mb-2 bg-white rounded-lg shadow-sm hover:bg-indigo-50 hover:shadow-md transition duration-300 ease-in-out transform hover:scale-[1.02]";
+    linkTag.target = "_blank";
+    linkTag.href = link.url;
+    linkTag.appendChild(divTag);
+
+    linksContainer.appendChild(linkTag);
+  });
+}
+
 function updateCounter() {
   const completed = tasks.filter((task) => task.completed).length;
   counterElement.textContent = `${completed} / ${tasks.length}`;
@@ -86,8 +119,11 @@ function updateCounter() {
 lessonSelect.addEventListener("change", (event) => {
   const value = event.target.value;
   setDescription(value);
-  setTasks(findLesson(value));
+  const lesson = findLesson(value);
+  setTasks(lesson);
+  setLinks(lesson);
   renderChecklist();
+  renderLinksList();
 });
 
 document.addEventListener("DOMContentLoaded", async () => {

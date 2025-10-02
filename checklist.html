@@ -1,53 +1,82 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Checklist Diário de Tarefas</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="./css/checklist.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./css/checklist.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
-<body class="bg-amber-50 text-slate-800 antialiased min-h-screen flex items-center justify-center p-4">
+  </head>
+  <body
+    class="bg-amber-50 text-slate-800 antialiased min-h-screen flex flex-col space-y-4 md:flex-row md:space-x-4 items-center justify-center p-4"
+  >
+    <div
+      class="w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden h-full flex flex-col max-h-[90vh]"
+    >
+      <header class="bg-slate-800 p-4 text-white rounded-t-2xl">
+        <h1 class="text-xl font-bold mb-1">UC2 - Projeto Desktop</h1>
+      </header>
 
-    <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
-        
-        <header class="bg-slate-800 p-4 text-white rounded-t-2xl">
-            <h1 class="text-xl font-bold mb-1">UC2 - Projeto Desktop</h1>
-        </header>
+      <div
+        class="p-6 pb-2 border-b border-slate-100 flex items-center justify-between"
+      >
+        <label for="lesson-select" class="text-sm font-semibold text-teal-600"
+          >SELECIONAR AULA:</label
+        >
+        <select
+          id="lesson-select"
+          class="p-2 border border-slate-300 rounded-lg text-sm text-slate-700 focus:ring-teal-500 focus:border-teal-500 transition-shadow"
+        >
+          <option selected disabled>Selecione uma aula</option>
+        </select>
+      </div>
 
-        <div class="p-6 pb-2 border-b border-slate-100 flex items-center justify-between">
-            <label for="lesson-select" class="text-sm font-semibold text-teal-600">SELECIONAR AULA:</label>
-            <select id="lesson-select" class="p-2 border border-slate-300 rounded-lg text-sm text-slate-700 focus:ring-teal-500 focus:border-teal-500 transition-shadow">
-                <option selected disabled>Selecione uma aula</option>
-            </select>
+      <div class="p-6">
+        <p class="text-sm font-semibold text-slate-500 mb-2">
+          DESCRIÇÃO RÁPIDA
+        </p>
+        <textarea
+          id="description-area"
+          class="w-full p-3 h-20 border border-slate-300 rounded-lg text-slate-700 resize-none focus:ring-teal-500 focus:border-teal-500 transition-shadow"
+          placeholder="Digite uma descrição ou adicione anotações aqui"
+          readonly
+        ></textarea>
+      </div>
+
+      <section class="p-6 pt-0 flex flex-col overflow-hidden">
+        <div class="flex justify-between items-center mb-4 border-t pt-4">
+          <h2 class="text-lg font-bold text-slate-800">Lista de verificação</h2>
+          <span
+            id="checklist-counter"
+            class="text-lg font-semibold text-teal-600"
+            >0 / 0</span
+          >
         </div>
 
-        <div class="p-6">
-            <p class="text-sm font-semibold text-slate-500 mb-2">DESCRIÇÃO RÁPIDA</p>
-            <textarea 
-                id="description-area"
-                class="w-full p-3 h-20 border border-slate-300 rounded-lg text-slate-700 resize-none focus:ring-teal-500 focus:border-teal-500 transition-shadow" 
-                placeholder="Digite uma descrição ou adicione anotações aqui" 
-                readonly
-            ></textarea>
-        </div>
+        <div id="checklist-items" class="space-y-3 space-y-3 **flex-grow overflow-y-auto pr-2"></div>
+      </section>
+    </div>
 
-        <section class="p-6 pt-0">
-            <div class="flex justify-between items-center mb-4 border-t pt-4">
-                <h2 class="text-lg font-bold text-slate-800">Lista de verificação</h2>
-                <span id="checklist-counter" class="text-lg font-semibold text-teal-600">0 / 0</span>
-            </div>
-        
-            <div id="checklist-items" class="space-y-3">
-            </div>
-            
-        </section>
-        
+    <!-- Links de ajuda -->
+    <div
+      class="w-full max-w-80 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden"
+    >
+      <header class="bg-slate-800 p-4 text-white rounded-t-2xl">
+        <h1 class="text-xl font-bold mb-1">Links úteis</h1>
+      </header>
+
+      <div
+        id="links-container"
+        class="p-6 pb-2 border-b border-slate-100 flex items-center justify-between"
+      ></div>
     </div>
 
     <script src="./js/checklist.js"></script>
-</body>
+  </body>
 </html>

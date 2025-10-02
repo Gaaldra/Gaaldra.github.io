@@ -86,6 +86,12 @@
         "text": "Na linha abaixo da criação do objeto userServicos, chame o método AdicionarUsuario e passe para ele o objeto novoUsuario.",
         "completed": false
       }
+    ],
+    "links": [
+      {
+        "title": "Criação de Listas no C#",
+        "url": "https://learn.microsoft.com/pt-br/dotnet/csharp/tour-of-csharp/tutorials/list-collection"
+      }
     ]
   }
 ]
