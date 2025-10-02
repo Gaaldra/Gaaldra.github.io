@@ -1,0 +1,8 @@
+body {
+  font-family: "Inter", sans-serif;
+}
+/* Estilo para simular o layout de item marcado */
+.completed-task {
+  text-decoration: line-through;
+  color: #94a3b8; /* slate-400 */
+}
