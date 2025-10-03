@@ -1,0 +1,42 @@
+{
+    "id": 20251001,
+    "date": "01/10/2025",
+    "description": "Criação dos serviços voltados ao modelo de usuário",
+    "tasks": [
+        {
+            "id": 1,
+            "text": "Criar a pasta de serviços (\"Serviços\") na raiz do projeto.",
+            "completed": false
+        },
+        {
+            "id": 2,
+            "text": "Criar o arquivo UsuarioServicos.cs dentro da nova pasta.",
+            "completed": false
+        },
+        {
+            "id": 3,
+            "text": "Adicionar a injeção de dependência do DBContext no construtor da classe UsuarioServicos",
+            "completed": false
+        },
+        {
+            "id": 4,
+            "text": "Criar o método público AdicionarUsuario(Usuario usuario) na classe de serviços",
+            "completed": false
+        },
+        {
+            "id": 5,
+            "text": "Implementar a chamada ao ORM para adicionar o objeto",
+            "completed": false
+        },
+        {
+            "id": 6,
+            "text": "Chamar SaveChanges para persistir os dados no banco de dados",
+            "completed": false
+        },
+        {
+            "id": 7,
+            "text": "Adicionar tratamento básico de exceções para lidar com possíveis falhas de conexão ou validação",
+            "completed": false
+        }
+    ]
+}
