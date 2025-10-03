@@ -1,71 +1,75 @@
 [
   {
-    "id": 20251002,
-    "date": "02/10/2025",
-    "description": "Aplicar a regra de negócios criada na ultima aula dentro do formulário apropriado",
+    "id": 20251003,
+    "date": "03/10/2025",
+    "description": "Refatoração de código e criação da regra de negócio para autenticar o usuario",
     "tasks": [
-      {
-        "id": 1,
-        "text": "Abra o formulário de cadastro, entre no código (F7) e procure o método CadastrarUsuario.",
-        "completed": false
-      },
-      {
-        "id": 2,
-        "text": "Na linha acima da criação do objeto userServicos, crie uma lista do tipo TextBox chamada camposParaValidar e inicie ela com todos os TextBox presentes no seu formulário de cadastro.",
-        "completed": false
-      },
-      {
-        "id": 3,
-        "text": "Depois, crie um código para percorrer com o ForEach a fim de verificar todos os TextBox.",
-        "completed": false
-      },
-      {
-        "id": 4,
-        "text": "Crie uma validação para ver se a propriedade Text de cada TextBox está Nula ou com Espaços em branco.",
-        "completed": false
-      },
-      {
-        "id": 5,
-        "text": "Caso o programa identifique espaços em branco, você deverá mostrar uma mensagem na tela com as seguintes informações: Titulo - Erro de Validação, Texto - Ainda existem campos vazios que precisam ser preenchidos. Depois faça com que o campo sem informação seja focado com o método Focus() e retorne vazio.",
-        "completed": false
-      },
-      {
-        "id": 6,
-        "text": "Faça uma verificação nos campos senha e confirmarSenha para ver se elas são iguais. Se forem diferentes, mostre uma mensagem para o usuário de que: As senhas digitadas não são iguais. Faça o programa focar no campo confirmarSenha e retorne vazio.",
-        "completed": false
-      },
-      {
-        "id": 7,
-        "text": "Crie um novo objeto de Usuario (aquele que criamos em Modelos) chamado de novoUsuario e insira as informações dos TextBox nas propriedades do objeto.",
-        "completed": false
-      },
-      {
-        "id": 8,
-        "text": "Na linha abaixo da criação do objeto userServicos, chame o método AdicionarUsuario e passe para ele o objeto novoUsuario.",
-        "completed": false
-      }
-    ],
-    "links": [
-      {
-        "title": "Criação de Listas no C#",
-        "url": "https://learn.microsoft.com/pt-br/dotnet/csharp/tour-of-csharp/tutorials/list-collection"
-      },
-      {
-        "title": "Como usar o ForEach",
-        "url": "https://learn.microsoft.com/pt-br/dotnet/csharp/language-reference/statements/iteration-statements#the-foreach-statement"
-      },
-      {
-        "title": "Exemplo de uso do string.IsNullOrWhiteSpace",
-        "url": "https://learn.microsoft.com/pt-br/dotnet/api/system.string.isnullorwhitespace?view=net-9.0#exemplos"
-      },
-      {
-        "title": "Comparações ordinárias padrão",
-        "url": "https://learn.microsoft.com/pt-br/dotnet/csharp/how-to/compare-strings#default-ordinal-comparisons"
-      },
-      {
-        "title": "Construtores de instância (guia de programação em C#)",
-        "url": "https://learn.microsoft.com/pt-br/dotnet/csharp/programming-guide/classes-and-structs/instance-constructors"
-      }
-    ]
+    {
+      "id": 1,
+      "text": "Transfira o bloco 'try-catch' do método **AdicionarUsuario** que está no arquivo **UsuarioServicos.cs** e coloque-o dentro do método **CadastrarUsuario** no formulário de cadastro.",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "text": "Coloque a criação do objeto **userServicos** e a chamada do método **AdicionarUsuario** dentro do bloco **try**.",
+      "completed": false
+    },
+    {
+      "id": 3,
+      "text": "No método **CadastrarUsuario**, após o bloco **try-catch**, crie um 'foreach' para percorrer a lista **camposParaValidar** (que contém os TextBox).",
+      "completed": false
+    },
+    {
+      "id": 4,
+      "text": "Dentro do 'foreach', para cada campo (TextBox) na lista, limpe a propriedade **Text** com **String.Empty**.",
+      "completed": false
+    },
+    {
+      "id": 5,
+      "text": "Abra o código do **FormLogin** e crie um método privado que retorna **void** (nada) chamado **AutenticarUsuario**.",
+      "completed": false
+    },
+    {
+      "id": 6,
+      "text": "Dentro do método **AutenticarUsuario**, crie uma lista do tipo **TextBox** e insira dentro dela os campos de login (e-mail e senha) do formulário.",
+      "completed": false
+    },
+    {
+      "id": 7,
+      "text": "Crie um 'foreach' para percorrer os TextBox da lista de login, fazendo uma validação para ver se a propriedade **Text** deles é **nula** ou contém apenas **espaço em branco** (use **string.IsNullOrWhiteSpace**).",
+      "completed": false
+    },
+    {
+      "id": 8,
+      "text": "Se a propriedade **Text** do campo for nula ou contiver somente espaços brancos, mostre uma mensagem em tela com: **Texto**: 'Você precisa digitar seu e-mail e senha.' **Titulo**: 'Campos em branco!'.",
+      "completed": false
+    },
+    {
+      "id": 9,
+      "text": "Dentro da condição de erro do 'foreach' (item 8), chame o método **Focus()** para que o programa foque no campo vazio.",
+      "completed": false
+    },
+    {
+      "id": 10,
+      "text": "Ainda dentro da condição de erro do 'foreach' (item 8), use **return;** para impedir o programa de prosseguir.",
+      "completed": false
+    },
+    {
+      "id": 11,
+      "text": "Fora do 'foreach' (após a validação), crie uma instância de **UsuarioServicos** e chame-a de **userServicos**.",
+      "completed": false
+    },
+    {
+      "id": 12,
+      "text": "Passe para o construtor do **userServicos** um novo **SalaoBelezaContext** (ou injete-o, dependendo da sua arquitetura).",
+      "completed": false
+    },
+    {
+      "id": 13,
+      "text": "Dentro do arquivo **UsuarioServicos**, crie um novo método **public** que retorna um **Usuario** e chama-se **ObterUsuario**. Este método deve receber uma string chamada **email** como parâmetro.",
+      "completed": false
+    }
+  ],
+    "links": []
   }
 ]
