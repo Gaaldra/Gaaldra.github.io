@@ -102,7 +102,7 @@ function renderLinksList() {
 
     const linkTag = document.createElement("a");
     linkTag.className =
-      "block p-3 mb-2 bg-white rounded-lg shadow-sm hover:bg-indigo-50 hover:shadow-md transition duration-300 ease-in-out transform hover:scale-[1.02]";
+      "block w-full p-3 mb-2 bg-white rounded-lg shadow-sm hover:bg-indigo-50 hover:shadow-md transition duration-300 ease-in-out transform hover:scale-[1.02]";
     linkTag.target = "_blank";
     linkTag.href = link.url;
     linkTag.appendChild(divTag);
