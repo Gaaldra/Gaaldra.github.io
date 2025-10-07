@@ -1,75 +1,163 @@
 [
-  {
-    "id": 20251003,
-    "date": "03/10/2025",
-    "description": "Refatoração de código e criação da regra de negócio para autenticar o usuario",
-    "tasks": [
     {
-      "id": 1,
-      "text": "Transfira o bloco 'try-catch' do método **AdicionarUsuario** que está no arquivo **UsuarioServicos.cs** e coloque-o dentro do método **CadastrarUsuario** no formulário de cadastro.",
-      "completed": false
-    },
-    {
-      "id": 2,
-      "text": "Coloque a criação do objeto **userServicos** e a chamada do método **AdicionarUsuario** dentro do bloco **try**.",
-      "completed": false
-    },
-    {
-      "id": 3,
-      "text": "No método **CadastrarUsuario**, após o bloco **try-catch**, crie um 'foreach' para percorrer a lista **camposParaValidar** (que contém os TextBox).",
-      "completed": false
-    },
-    {
-      "id": 4,
-      "text": "Dentro do 'foreach', para cada campo (TextBox) na lista, limpe a propriedade **Text** com **String.Empty**.",
-      "completed": false
-    },
-    {
-      "id": 5,
-      "text": "Abra o código do **FormLogin** e crie um método privado que retorna **void** (nada) chamado **AutenticarUsuario**.",
-      "completed": false
-    },
-    {
-      "id": 6,
-      "text": "Dentro do método **AutenticarUsuario**, crie uma lista do tipo **TextBox** e insira dentro dela os campos de login (e-mail e senha) do formulário.",
-      "completed": false
-    },
-    {
-      "id": 7,
-      "text": "Crie um 'foreach' para percorrer os TextBox da lista de login, fazendo uma validação para ver se a propriedade **Text** deles é **nula** ou contém apenas **espaço em branco** (use **string.IsNullOrWhiteSpace**).",
-      "completed": false
-    },
-    {
-      "id": 8,
-      "text": "Se a propriedade **Text** do campo for nula ou contiver somente espaços brancos, mostre uma mensagem em tela com: **Texto**: 'Você precisa digitar seu e-mail e senha.' **Titulo**: 'Campos em branco!'.",
-      "completed": false
-    },
-    {
-      "id": 9,
-      "text": "Dentro da condição de erro do 'foreach' (item 8), chame o método **Focus()** para que o programa foque no campo vazio.",
-      "completed": false
-    },
-    {
-      "id": 10,
-      "text": "Ainda dentro da condição de erro do 'foreach' (item 8), use **return;** para impedir o programa de prosseguir.",
-      "completed": false
-    },
-    {
-      "id": 11,
-      "text": "Fora do 'foreach' (após a validação), crie uma instância de **UsuarioServicos** e chame-a de **userServicos**.",
-      "completed": false
-    },
-    {
-      "id": 12,
-      "text": "Passe para o construtor do **userServicos** um novo **SalaoBelezaContext** (ou injete-o, dependendo da sua arquitetura).",
-      "completed": false
-    },
-    {
-      "id": 13,
-      "text": "Dentro do arquivo **UsuarioServicos**, crie um novo método **public** que retorna um **Usuario** e chama-se **ObterUsuario**. Este método deve receber uma string chamada **email** como parâmetro.",
-      "completed": false
+        "id": 20251007,
+        "date": "07/10/2025",
+        "description": "Revisão Progressiva e Encadeada dos Fundamentos de C# (Mini-Projeto Guiado)",
+        "tasks": [
+            {
+                "id": 1,
+                "text": "Declare as variáveis: 'string nomeAluno' (com seu nome), 'int notaGeral' (ex: 85) e 'double mediaExigida' (70.0).",
+                "completed": false
+            },
+            {
+                "id": 2,
+                "text": "Defina a constante 'const int CARGA_HORARIA = 60' e use casting explícito para converter 'notaGeral' (int) em 'double' e armazenar em 'notaDouble'.",
+                "completed": false
+            },
+            {
+                "id": 3,
+                "text": "Use Console.WriteLine() para exibir 'nomeAluno' e 'notaGeral'. Use Console.ReadLine() para pausar.",
+                "completed": false
+            },
+            {
+                "id": 4,
+                "text": "Crie e chame o método 'void ExibirCargaHoraria()' (que exibe a constante) e o método 'string ObterStatusPadrao()' (que retorna 'Em Progresso').",
+                "completed": false
+            },
+            {
+                "id": 5,
+                "text": "Crie o método 'bool VerificarAprovacao(int nota, double media)' e chame-o usando as variáveis 'notaGeral' e 'mediaExigida', armazenando o resultado em 'bool aprovado'.",
+                "completed": false
+            },
+            {
+                "id": 6,
+                "text": "Crie o método 'void ImprimirResultado(bool aprovado)' que implementa uma estrutura 'if', 'else if' e 'else' baseada no valor de 'aprovado'.",
+                "completed": false
+            },
+            {
+                "id": 7,
+                "text": "Adicione uma condição que verifica se 'notaGeral' > 80 E 'aprovado' é true, usando os operadores lógicos AND (&&), OR (||) e NOT (!).",
+                "completed": false
+            },
+            {
+                "id": 8,
+                "text": "Crie o método 'void AnalisarNota(int nota)' com um 'switch' statement (com default) que classifica a nota em 'Conceito A', 'Conceito B', etc.",
+                "completed": false
+            },
+            {
+                "id": 9,
+                "text": "Crie um 'for' loop (contador 1 a 5) e um 'while' loop (exibir 'nomeAluno' 3 vezes).",
+                "completed": false
+            },
+            {
+                "id": 10,
+                "text": "Use 'break' para sair do 'do-while' em 4 repetições e 'continue' para pular uma iteração impares do 'while'.",
+                "completed": false
+            },
+            {
+                "id": 11,
+                "text": "Declare, inicialize e itere um Array de 'string' chamado 'disciplinas' (com 3 nomes).",
+                "completed": false
+            },
+            {
+                "id": 12,
+                "text": "Use o 'foreach' loop para iterar sobre todos os elementos do Array 'disciplinas' e exibi-los.",
+                "completed": false
+            },
+            {
+                "id": 13,
+                "text": "Crie uma List<string> chamada 'tarefas'. Use Add() 3 vezes, Remove() para excluir um item, e exiba a quantidade total de itens com Count.",
+                "completed": false
+            },
+            {
+                "id": 14,
+                "text": "Criar e inicializar um Dictionary<TKey, TValue> (ex: Dictionary<int, string>).",
+                "completed": false
+            },
+            {
+                "id": 15,
+                "text": "Adicionar elementos ao Dictionary e tentar acessar um valor pela chave (key).",
+                "completed": false
+            },
+            {
+                "id": 16,
+                "text": "Usar o método TryGetValue para buscar uma chave no Dictionary de forma segura.",
+                "completed": false
+            }
+        ],
+        "links": [
+            {
+                "title": "Conheça os conceitos básicos do sistema de tipos C#",
+                "url": "https://learn.microsoft.com/pt-br/dotnet/csharp/fundamentals/types/"
+            },
+            {
+                "title": "Conversão e testes de tipo (Guia de programação em C#)",
+                "url": "https://learn.microsoft.com/pt-br/dotnet/csharp/programming-guide/types/casting-and-type-conversions"
+            },
+            {
+                "title": "Constantes (Guia de programação em C#)",
+                "url": "https://learn.microsoft.com/pt-br/dotnet/csharp/language-reference/keywords/const"
+            },
+            {
+                "title": "Instruções if e switch - selecione um caminho de código a ser executado",
+                "url": "https://learn.microsoft.com/pt-br/dotnet/csharp/language-reference/statements/selection-statements"
+            },
+            {
+                "title": "Branches e loops – Tutorial introdutório (Inclui If/Else, operadores lógicos e loops)",
+                "url": "https://learn.microsoft.com/pt-br/dotnet/csharp/tour-of-csharp/tutorials/branches-and-loops"
+            },
+            {
+                "title": "Instruções de iteração (for, while, do, foreach) (Referência C#)",
+                "url": "https://learn.microsoft.com/pt-br/dotnet/csharp/language-reference/statements/iteration-statements"
+            },
+            {
+                "title": "Console.WriteLine Method (System) - Referência (para I/O)",
+                "url": "https://learn.microsoft.com/en-us/dotnet/api/system.console.writeline"
+            },
+            {
+                "title": "Console.ReadLine Method (System) - Referência (para I/O)",
+                "url": "https://learn.microsoft.com/en-us/dotnet/api/system.console.readline"
+            },
+            {
+                "title": "Métodos (Guia de programação em C#)",
+                "url": "https://learn.microsoft.com/pt-br/dotnet/csharp/programming-guide/classes-and-structs/methods"
+            },
+            {
+                "title": "Arrays (Guia de programação em C#)",
+                "url": "https://learn.microsoft.com/pt-br/dotnet/csharp/programming-guide/arrays/index"
+            },
+            {
+                "title": "Trabalhando com Coleções (List<T>) – Tutorial interativo introdutório",
+                "url": "https://learn.microsoft.com/pt-br/dotnet/csharp/tour-of-csharp/tutorials/list-collection"
+            },
+            {
+                "title": "C#: Como criar e utilizar funções (Inclui métodos void, com retorno e com parâmetros)",
+                "url": "https://www.rocketseat.com.br/blog/artigos/post/csharp-como-criar-utilizar-funcoes"
+            },
+            {
+                "title": "Arrays vs Lists em C#: Compreendendo através de Exemplos",
+                "url": "https://www.rocketseat.com.br/blog/artigos/post/csharp-array-vs-lists"
+            },
+            {
+                "title": "Dictionary<TKey, TValue> Class (Referência Oficial)",
+                "url": "https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2?view=net-9.0"
+            },
+            {
+                "title": "Dictionary<TKey, TValue>.TryGetValue Method (Uso eficiente de TryGetValue)",
+                "url": "https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.trygetvalue?view=net-9.0"
+            },
+            {
+                "title": "CA1854: Preferir o método TryGetValue (Dica de Performance)",
+                "url": "https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1854"
+            },
+            {
+                "title": "Como iterar sobre um dicionário em C# (Usando foreach e KeyValuePair)",
+                "url": "https://www.arungudelli.com/pt-br/tutorial/c-sharp/how-to-iterate-over-dictionary-in-c-sharp/"
+            },
+            {
+                "title": "KeyValuePair<TKey, TValue> Estrutura (Para entender o foreach em Dictionary)",
+                "url": "https://learn.microsoft.com/pt-br/dotnet/api/system.collections.generic.keyvaluepair-2?view=net-8.0"
+            }
+        ]
     }
-  ],
-    "links": []
-  }
 ]
